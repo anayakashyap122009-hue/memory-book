@@ -1,5 +1,5 @@
 "use client";
-
+import MusicPlayer from "@/components/MusicPlayer";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -35,6 +35,10 @@ export default function Home() {
             duration: 0.8,
           }}
         >
+          <MusicPlayer
+    song="/music/song1.mp3"
+    title="Our Beginning"
+/>
           <Hero />
 
           {/* Next chapters will be added here */}
