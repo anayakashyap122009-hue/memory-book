@@ -226,3 +226,152 @@ that's why memories are so powerful.`}
                     />
 
                 </motion.div>
+                </motion.div>
+
+                {/* Cute Love Note */}
+
+                <motion.div
+
+                    initial={{ opacity: 0, scale: .9 }}
+
+                    whileInView={{ opacity: 1, scale: 1 }}
+
+                    viewport={{ once: true }}
+
+                    transition={{ duration: .8 }}
+
+                    className="mt-12 rounded-[30px] bg-pink-100 p-6 shadow-xl"
+
+                >
+
+                    <h3 className="text-center text-2xl font-bold text-pink-700">
+
+                        A Little Note 💌
+
+                    </h3>
+
+                    <p className="mt-5 text-center leading-8 text-gray-700">
+
+                        If I could pause one moment forever...
+
+                        I wouldn't choose the richest day,
+
+                        or the luckiest day.
+
+                        I'd choose any ordinary day...
+
+                        as long as you were with me.
+
+                    </p>
+
+                </motion.div>
+
+            </div>
+
+            {/* Fullscreen Photo Viewer */}
+
+            {selected && (
+
+                <motion.div
+
+                    initial={{ opacity: 0 }}
+
+                    animate={{ opacity: 1 }}
+
+                    exit={{ opacity: 0 }}
+
+                    onClick={() => setSelected(null)}
+
+                    className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 p-6"
+
+                >
+
+                    <motion.img
+
+                        initial={{ scale: .8 }}
+
+                        animate={{ scale: 1 }}
+
+                        src={selected}
+
+                        className="max-h-[85vh] rounded-3xl shadow-2xl"
+
+                        alt="Selected"
+
+                    />
+
+                </motion.div>
+
+            )}
+
+            {/* Floating Butterflies */}
+
+            {[...Array(8)].map((_, i) => (
+
+                <motion.div
+
+                    key={i}
+
+                    className="absolute text-3xl"
+
+                    style={{
+                        left: `${10 + Math.random() * 80}%`,
+                        top: `${Math.random() * 100}%`,
+                    }}
+
+                    animate={{
+                        y: [-20, 20, -20],
+                        x: [-15, 15, -15],
+                        rotate: [-8, 8, -8],
+                    }}
+
+                    transition={{
+                        repeat: Infinity,
+                        duration: 5 + Math.random() * 3,
+                    }}
+
+                >
+
+                    🦋
+
+                </motion.div>
+
+            ))}
+
+            {/* Ending */}
+
+            <motion.div
+
+                initial={{ opacity: 0 }}
+
+                whileInView={{ opacity: 1 }}
+
+                viewport={{ once: true }}
+
+                transition={{ delay: .3 }}
+
+                className="relative z-20 mt-24 text-center"
+
+            >
+
+                <h2 className="text-4xl font-bold text-pink-700">
+
+                    More Memories Await...
+
+                </h2>
+
+                <p className="mt-4 text-gray-600 leading-8">
+
+                    Every picture tells a story,
+
+                    and ours is my favorite one.
+
+                </p>
+
+            </motion.div>
+
+        </section>
+
+    );
+
+}
