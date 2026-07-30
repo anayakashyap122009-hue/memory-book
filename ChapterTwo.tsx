@@ -206,3 +206,221 @@ I never want tooo.`}
                     />
 
                 </motion.div>
+                {/* ===============================
+                    Quote Card
+                =============================== */}
+
+                <motion.div
+
+                    initial={{
+                        opacity: 0,
+                        scale: .9
+                    }}
+
+                    whileInView={{
+                        opacity: 1,
+                        scale: 1
+                    }}
+
+                    viewport={{
+                        once: true
+                    }}
+
+                    transition={{
+                        duration: .8
+                    }}
+
+                    className="mt-14 rounded-[30px] bg-gradient-to-r from-pink-100 to-rose-100 p-7 shadow-xl"
+
+                >
+
+                    <p
+                        style={{
+                            fontFamily: "cursive"
+                        }}
+                        className="text-center text-2xl text-pink-700 leading-10"
+                    >
+                        "Every picture is a little piece of forever."
+                    </p>
+
+                </motion.div>
+
+                {/* ===============================
+                    Second Scrapbook Card
+                =============================== */}
+
+                <div className="mt-16">
+
+                    <ScrapbookCard
+
+                        image="/images/05.jpg"
+
+                        caption="A memory that still makes my heart smile."
+
+                        rotate={5}
+
+                    />
+
+                </div>
+
+                {/* ===============================
+                    Mini Film Strip
+                =============================== */}
+
+                <motion.div
+
+                    initial={{
+                        opacity:0,
+                        y:80
+                    }}
+
+                    whileInView={{
+                        opacity:1,
+                        y:0
+                    }}
+
+                    viewport={{
+                        once:true
+                    }}
+
+                    transition={{
+                        duration:.8
+                    }}
+
+                    className="mt-20"
+
+                >
+
+                    <div className="rounded-[30px] bg-black p-4 shadow-2xl">
+
+                        <div className="grid grid-cols-3 gap-3">
+
+                            <img
+                                src="/images/06.jpg"
+                                className="aspect-[3/4] rounded-xl object-cover"
+                            />
+
+                            <img
+                                src="/images/07.jpg"
+                                className="aspect-[3/4] rounded-xl object-cover"
+                            />
+
+                            <img
+                                src="/images/08.jpg"
+                                className="aspect-[3/4] rounded-xl object-cover"
+                            />
+
+                        </div>
+
+                    </div>
+
+                </motion.div>
+
+                {/* ===============================
+                    Ending Letter
+                =============================== */}
+
+                <motion.div
+
+                    initial={{
+                        opacity:0,
+                        y:80
+                    }}
+
+                    whileInView={{
+                        opacity:1,
+                        y:0
+                    }}
+
+                    viewport={{
+                        once:true
+                    }}
+
+                    transition={{
+                        duration:.8
+                    }}
+
+                    className="mt-20"
+
+                >
+
+                    <Typewriter
+
+                        speed={30}
+
+                        className="text-lg leading-9 text-gray-700"
+
+                        text={`Some memories don't become old.
+
+They become precious.
+
+Sometimes all it takes is one photograph...
+
+to relive an entire day.
+
+To hear the laughter again.
+
+To remember the tiny details.
+
+And to smile without even realizing it.
+
+Maybe that's the magic of memories.
+
+They never really leave us.
+
+They simply wait...
+
+until we look back again.`}
+
+                    />
+
+                </motion.div>
+
+                {/* ===============================
+                    Continue
+                =============================== */}
+
+                <motion.div
+
+                    initial={{
+                        opacity:0
+                    }}
+
+                    whileInView={{
+                        opacity:1
+                    }}
+
+                    viewport={{
+                        once:true
+                    }}
+
+                    transition={{
+                        delay:.3
+                    }}
+
+                    className="mt-24 text-center"
+
+                >
+
+                    <h3 className="text-4xl font-bold text-pink-700">
+
+                        Our Story Continues...
+
+                    </h3>
+
+                    <p className="mt-5 text-gray-500 leading-8">
+
+                        Every scroll uncovers another
+                        beautiful page of our journey.
+
+                    </p>
+
+                </motion.div>
+
+            </div>
+
+        </section>
+
+    );
+
+}
