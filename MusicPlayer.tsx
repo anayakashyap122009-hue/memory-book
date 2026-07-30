@@ -1,81 +1,128 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Pause, Play, Volume2 } from "lucide-react";
 
-interface Props {
-  song: string;
-  title: string;
-}
+const songs = [
+  "/music/song1.mp3",
+  "/music/song2.mp3",
+  "/music/song3.mp3",
+  "/music/song4.mp3",
+  "/music/song5.mp3",
+  "/music/song6.mp3",
+  "/music/song7.mp3",
+  "/music/song8.mp3",
+];
 
-export default function MusicPlayer({ song, title }: Props) {
+export default function MusicPlayer() {
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [playing, setPlaying] = useState(false);
+  const [currentSong, setCurrentSong] = useState(0);
+
+  const [playing, setPlaying] = useState(true);
+
+  const [volume, setVolume] = useState(0.65);
+
+  const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
-    if (!audioRef.current) return;
 
-    audioRef.current.src = song;
-  }, [song]);
+    const audio = audioRef.current;
 
-  const toggle = async () => {
-    if (!audioRef.current) return;
+    if (!audio) return;
+
+    audio.volume = volume;
 
     if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
+
+      audio.play().catch(()=>{});
+
     } else {
-      try {
-        await audioRef.current.play();
-        setPlaying(true);
-      } catch (e) {
-        console.log(e);
-      }
+
+      audio.pause();
+
     }
+
+  }, [playing, volume]);
+
+  useEffect(() => {
+
+    let id: NodeJS.Timeout;
+
+    if (playing){
+
+      id = setInterval(()=>{
+
+        setRotation(r=>r+1);
+
+      },25);
+
+    }
+
+    return ()=>clearInterval(id);
+
+  },[playing]);
+
+  const changeSong = (index:number)=>{
+
+      if(index===currentSong) return;
+
+      const audio=audioRef.current;
+
+      if(!audio) return;
+
+      let v=volume;
+
+      const fadeOut=setInterval(()=>{
+
+        v-=0.05;
+
+        if(v<=0){
+
+          clearInterval(fadeOut);
+
+          audio.pause();
+
+          setCurrentSong(index);
+
+        }
+
+        audio.volume=Math.max(v,0);
+
+      },70);
+
   };
 
-  return (
-    <>
-      <audio ref={audioRef} loop />
+  useEffect(()=>{
 
-      <motion.div
-        initial={{ y: 120 }}
-        animate={{ y: 0 }}
-        className="fixed bottom-5 left-1/2 z-50 flex w-[92%] max-w-sm -translate-x-1/2 items-center justify-between rounded-full bg-white/90 px-5 py-3 shadow-2xl backdrop-blur-xl"
-      >
-        <div className="flex items-center gap-3">
-          <motion.div
-            animate={{
-              rotate: playing ? 360 : 0,
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-              ease: "linear",
-            }}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-500 text-white"
-          >
-            🎵
-          </motion.div>
+      const audio=audioRef.current;
 
-          <div>
-            <h3 className="text-sm font-semibold">{title}</h3>
+      if(!audio) return;
 
-            <p className="text-xs text-gray-500">
-              Memory Book
-            </p>
-          </div>
-        </div>
+      audio.src=songs[currentSong];
 
-        <button
-          onClick={toggle}
-          className="rounded-full bg-pink-500 p-3 text-white"
-        >
-          {playing ? <Pause size={18} /> : <Play size={18} />}
-        </button>
-      </motion.div>
-    </>
-  );
-}
+      audio.load();
+
+      audio.volume=0;
+
+      audio.play().catch(()=>{});
+
+      let v=0;
+
+      const fadeIn=setInterval(()=>{
+
+          v+=0.05;
+
+          audio.volume=Math.min(v,volume);
+
+          if(v>=volume){
+
+             clearInterval(fadeIn);
+
+          }
+
+      },70);
+
+  },[currentSong]);
