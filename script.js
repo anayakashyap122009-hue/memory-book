@@ -187,3 +187,26 @@ intro.classList.add("hide");
 music.play().catch(()=>{});
 
 },5500);
+// ==========================
+// Envelope
+// ==========================
+
+const envelope=document.getElementById("envelope");
+
+const openLetter=document.getElementById("openLetter");
+
+openLetter.onclick=()=>{
+
+envelope.classList.toggle("open");
+
+if(envelope.classList.contains("open")){
+
+openLetter.innerHTML="❤️ I Love You Forever ❤️";
+
+}else{
+
+openLetter.innerHTML="💌 Open My Letter";
+
+}
+
+}
