@@ -152,3 +152,38 @@ star.remove();
 }
 
 setInterval(sparkle,250);
+// =============================
+// CINEMATIC INTRO
+// =============================
+
+const intro=document.getElementById("introScreen");
+
+const introText=document.getElementById("introText");
+
+const sentence="A little surprise for the most beautiful girl in my life... ❤️";
+
+let i=0;
+
+function type(){
+
+if(i<sentence.length){
+
+introText.innerHTML+=sentence.charAt(i);
+
+i++;
+
+setTimeout(type,65);
+
+}
+
+}
+
+type();
+
+setTimeout(()=>{
+
+intro.classList.add("hide");
+
+music.play().catch(()=>{});
+
+},5500);
