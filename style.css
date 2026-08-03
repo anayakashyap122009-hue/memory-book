@@ -502,3 +502,44 @@ transform:scale(1.03);
         padding:60px 16px;
     }
 }
+@keyframes floatHeart{
+
+0%{
+
+transform:translateY(0) scale(0.5);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) scale(1.4);
+
+opacity:0;
+
+}
+
+}
+
+@keyframes fall{
+
+0%{
+
+transform:translateY(0) rotate(0deg);
+
+}
+
+100%{
+
+transform:translateY(120vh) rotate(360deg);
+
+}
+
+}
