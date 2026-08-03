@@ -210,3 +210,63 @@ openLetter.innerHTML="💌 Open My Letter";
 }
 
 }
+// =============================
+// MUSIC PLAYER
+// =============================
+
+const music = document.getElementById("bgMusic");
+
+const songs = [
+    "music/song1.mp3",
+    "music/song2.mp3",
+    "music/song3.mp3",
+    "music/song4.mp3",
+    "music/song5.mp3",
+    "music/song6.mp3",
+    "music/song7.mp3",
+    "music/song8.mp3"
+];
+
+let currentSong = 0;
+let playing = true;
+
+music.src = songs[0];
+music.volume = 0.55;
+
+music.play().catch(()=>{});
+
+const musicButton = document.getElementById("musicButton");
+
+musicButton.onclick = () => {
+
+    if(playing){
+
+        music.pause();
+        musicButton.innerHTML="🔇";
+        playing=false;
+
+    }else{
+
+        music.play();
+        musicButton.innerHTML="🎵";
+        playing=true;
+
+    }
+
+};
+
+},{
+threshold:.55
+});
+
+sections.forEach(id=>{
+
+const section=document.getElementById(id);
+
+if(section){
+
+observer.observe(section);
+
+}
+
+});
