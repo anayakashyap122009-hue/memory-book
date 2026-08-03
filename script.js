@@ -208,61 +208,79 @@ setInterval(sparkle,500);
 
 
 // ===============================
-// MUSIC PLAYER 🎵
+// BACKGROUND MUSIC 🎵
 // ===============================
 
+const music = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
 
-const music =
-document.getElementById("bgMusic");
-
-
-const musicButton =
-document.getElementById("musicButton");
+let isPlaying = false;
 
 
+// start song
+window.addEventListener("load",()=>{
 
-let playing=false;
+    music.volume = 0.5;
+
+    music.play()
+    .then(()=>{
+        isPlaying=true;
+        musicButton.innerHTML="⏸️";
+    })
+    .catch(()=>{
+        console.log("Mobile browser needs first click");
+    });
+
+});
+
+
+// Play music after first touch (mobile fix)
+
+document.addEventListener("click",()=>{
+
+    if(!isPlaying){
+
+        music.play()
+        .then(()=>{
+
+            isPlaying=true;
+            musicButton.innerHTML="⏸️";
+
+        });
+
+    }
+
+},{once:true});
 
 
 
-// Put your song name here
-
-music.src="song.mp3";
-
-
+// Music button
 
 musicButton.addEventListener("click",()=>{
 
 
-if(playing){
+if(isPlaying){
 
-music.pause();
+    music.pause();
 
-musicButton.innerHTML="🎵";
+    musicButton.innerHTML="🎵";
 
-playing=false;
-
+    isPlaying=false;
 
 }
 
 else{
 
+    music.play();
 
-music.play()
-.catch(()=>{});
+    musicButton.innerHTML="⏸️";
 
-
-musicButton.innerHTML="⏸️";
-
-playing=true;
-
+    isPlaying=true;
 
 }
 
 
-
 });
-
 
 
 // mobile autoplay after touch
