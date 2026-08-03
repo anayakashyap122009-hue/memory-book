@@ -1,154 +1,546 @@
-// =============================
-// MUSIC
-// =============================
+// ======================================
+// MEMORY BOOK ❤️ SCRIPT.JS
+// ======================================
 
-const music = document.getElementById("bgMusic");
-const musicButton = document.getElementById("musicButton");
 
-let playing = true;
+// ===============================
+// INTRO SCREEN
+// ===============================
 
-music.volume = 0.55;
+const introText = document.getElementById("introText");
 
-musicButton.onclick = () => {
+const introMessage =
+"Happy Girlfriend's Day My Love ❤️";
 
-    if (playing) {
 
-        music.pause();
-        musicButton.innerHTML = "🔇";
-        playing = false;
+let introIndex = 0;
 
-    } else {
 
-        music.play();
-        musicButton.innerHTML = "🎵";
-        playing = true;
+function typeIntro(){
+
+    if(introIndex < introMessage.length){
+
+        introText.innerHTML += introMessage.charAt(introIndex);
+
+        introIndex++;
+
+        setTimeout(typeIntro,80);
 
     }
 
-};
+}
 
-// =============================
-// START BUTTON
-// =============================
 
-const startBtn = document.getElementById("startJourney");
+typeIntro();
 
-if(startBtn){
 
-startBtn.onclick = ()=>{
 
-document.getElementById("chapter1").scrollIntoView({
+window.addEventListener("load",()=>{
 
-behavior:"smooth"
+    setTimeout(()=>{
+
+        document.getElementById("introScreen")
+        .style.opacity="0";
+
+
+        setTimeout(()=>{
+
+            document.getElementById("introScreen")
+            .style.display="none";
+
+        },1000);
+
+
+    },3500);
 
 });
 
-}
 
-}
 
-// =============================
-// HEARTS
-// =============================
 
-const hearts=document.getElementById("hearts");
+
+// ===============================
+// FLOATING HEARTS ❤️
+// ===============================
+
+
+const heartsContainer =
+document.getElementById("hearts");
+
 
 function createHeart(){
 
-const heart=document.createElement("div");
 
-heart.innerHTML="❤";
+let heart=document.createElement("span");
 
-heart.style.position="absolute";
 
-heart.style.left=Math.random()*100+"vw";
+heart.innerHTML="❤️";
 
-heart.style.top="100vh";
 
-heart.style.fontSize=(16+Math.random()*20)+"px";
+heart.className="floating-heart";
 
-heart.style.color="#ff5c9d";
 
-heart.style.opacity=Math.random();
+heart.style.left =
+Math.random()*100+"vw";
 
-heart.style.animation=`floatHeart ${6+Math.random()*5}s linear forwards`;
 
-hearts.appendChild(heart);
+heart.style.animationDuration =
+(4+Math.random()*5)+"s";
+
+
+heartsContainer.appendChild(heart);
+
+
 
 setTimeout(()=>{
 
 heart.remove();
 
-},11000);
+},9000);
+
 
 }
 
-setInterval(createHeart,350);
 
-// =============================
-// PETALS
-// =============================
+setInterval(createHeart,400);
 
-const petals=document.getElementById("petals");
+
+
+
+
+// ===============================
+// PETALS 🌸
+// ===============================
+
+
+const petals =
+document.getElementById("petals");
+
 
 function createPetal(){
 
-const flower=document.createElement("div");
 
-flower.innerHTML="🌸";
+let petal=document.createElement("span");
 
-flower.style.position="absolute";
 
-flower.style.left=Math.random()*100+"vw";
+petal.innerHTML="🌸";
 
-flower.style.top="-50px";
 
-flower.style.fontSize=(18+Math.random()*18)+"px";
+petal.className="petal";
 
-flower.style.animation=`fall ${7+Math.random()*6}s linear forwards`;
 
-petals.appendChild(flower);
+petal.style.left =
+Math.random()*100+"vw";
+
+
+petal.style.animationDuration =
+(5+Math.random()*5)+"s";
+
+
+petals.appendChild(petal);
+
+
 
 setTimeout(()=>{
 
-flower.remove();
+petal.remove();
 
-},13000);
+},10000);
+
 
 }
 
-setInterval(createPetal,450);
 
-// =============================
-// SPARKLES
-// =============================
+setInterval(createPetal,700);
 
-const sparkles=document.getElementById("sparkles");
+
+
+
+
+// ===============================
+// SPARKLES ✨
+// ===============================
+
+
+const sparkles =
+document.getElementById("sparkles");
+
+
 
 function sparkle(){
 
-const star=document.createElement("div");
+
+let star=document.createElement("span");
+
 
 star.innerHTML="✨";
 
-star.style.position="absolute";
 
-star.style.left=Math.random()*100+"vw";
+star.className="sparkle";
 
-star.style.top=Math.random()*100+"vh";
 
-star.style.fontSize=(10+Math.random()*10)+"px";
+star.style.left =
+Math.random()*100+"vw";
 
-star.style.opacity=Math.random();
+
+star.style.top =
+Math.random()*100+"vh";
+
 
 sparkles.appendChild(star);
+
+
 
 setTimeout(()=>{
 
 star.remove();
 
-},2500);
+},3000);
+
 
 }
 
-setInterval(sparkle,250);
+
+setInterval(sparkle,500);
+
+
+
+
+
+// ===============================
+// MUSIC PLAYER 🎵
+// ===============================
+
+
+const music =
+document.getElementById("bgMusic");
+
+
+const musicButton =
+document.getElementById("musicButton");
+
+
+
+let playing=false;
+
+
+
+// Put your song name here
+
+music.src="song.mp3";
+
+
+
+musicButton.addEventListener("click",()=>{
+
+
+if(playing){
+
+music.pause();
+
+musicButton.innerHTML="🎵";
+
+playing=false;
+
+
+}
+
+else{
+
+
+music.play()
+.catch(()=>{});
+
+
+musicButton.innerHTML="⏸️";
+
+playing=true;
+
+
+}
+
+
+
+});
+
+
+
+// mobile autoplay after touch
+
+document.body.addEventListener("click",()=>{
+
+if(!playing){
+
+music.play()
+.catch(()=>{});
+
+playing=true;
+
+}
+
+
+},{once:true});
+
+
+
+
+
+
+
+// ===============================
+// START JOURNEY BUTTON
+// ===============================
+
+
+const startButton =
+document.getElementById("startJourney");
+
+
+
+if(startButton){
+
+
+startButton.addEventListener("click",()=>{
+
+
+document.getElementById("chapter1")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// SCROLL ANIMATION
+// ===============================
+
+
+const sections =
+document.querySelectorAll("section");
+
+
+
+window.addEventListener("scroll",()=>{
+
+
+sections.forEach(section=>{
+
+
+let position =
+section.getBoundingClientRect().top;
+
+
+
+if(position < window.innerHeight-100){
+
+
+section.classList.add("show");
+
+
+}
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+// ===============================
+// PHOTO HEART EFFECT ❤️
+// ===============================
+
+
+const photos =
+document.querySelectorAll("img");
+
+
+
+photos.forEach(photo=>{
+
+
+photo.addEventListener("click",(e)=>{
+
+
+let heart=document.createElement("div");
+
+
+heart.innerHTML="💗";
+
+
+heart.className="click-heart";
+
+
+heart.style.left =
+e.pageX+"px";
+
+
+heart.style.top =
+e.pageY+"px";
+
+
+document.body.appendChild(heart);
+
+
+
+setTimeout(()=>{
+
+heart.remove();
+
+},1500);
+
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+// ===============================
+// ENVELOPE OPEN 💌
+// ===============================
+
+
+const openLetter =
+document.getElementById("openLetter");
+
+
+const envelope =
+document.getElementById("envelope");
+
+
+
+if(openLetter){
+
+
+openLetter.addEventListener("click",()=>{
+
+
+envelope.classList.toggle("open");
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// HEART GALLERY RANDOM FLOAT
+// ===============================
+
+
+const galleryImages =
+document.querySelectorAll(".heart-gallery img");
+
+
+
+galleryImages.forEach((img,index)=>{
+
+
+img.style.animationDelay =
+(index*0.15)+"s";
+
+
+});
+
+
+
+
+
+
+
+// ===============================
+// LOVE COUNTER
+// ===============================
+
+
+// Change date according to your relationship
+
+const startDate =
+new Date("2026-01-01");
+
+
+
+function loveDays(){
+
+
+let today =
+new Date();
+
+
+let difference =
+today-startDate;
+
+
+
+let days =
+Math.floor(
+difference/(1000*60*60*24)
+);
+
+
+
+console.log(
+"❤️ Together for "+days+" days ❤️"
+);
+
+
+}
+
+
+loveDays();
+
+
+
+
+
+
+
+// ===============================
+// DISABLE IMAGE DRAG
+// ===============================
+
+
+document.querySelectorAll("img")
+.forEach(img=>{
+
+
+img.draggable=false;
+
+
+});
+
+
+
+console.log(
+"❤️ Memory Book Loaded Successfully ❤️"
+);
