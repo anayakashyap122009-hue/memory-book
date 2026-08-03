@@ -1,157 +1,154 @@
-// ===========================
+// =============================
 // MUSIC
-// ===========================
+// =============================
 
 const music = document.getElementById("bgMusic");
 const musicButton = document.getElementById("musicButton");
 
-const songs = [
-  "music/song1.mp3",
-  "music/song2.mp3",
-  "music/song3.mp3",
-  "music/song4.mp3",
-  "music/song5.mp3",
-  "music/song6.mp3",
-  "music/song7.mp3",
-  "music/song8.mp3"
-];
+let playing = true;
 
-let currentSong = 0;
-let isPlaying = true;
+music.volume = 0.55;
 
-if (music) {
-  music.src = songs[0];
-  music.volume = 0.6;
-}
+musicButton.onclick = () => {
 
-if (musicButton) {
-  musicButton.addEventListener("click", () => {
-    if (!music) return;
+    if (playing) {
 
-    if (isPlaying) {
-      music.pause();
-      musicButton.textContent = "🔇";
-      isPlaying = false;
+        music.pause();
+        musicButton.innerHTML = "🔇";
+        playing = false;
+
     } else {
-      music.play().catch(() => {});
-      musicButton.textContent = "🎵";
-      isPlaying = true;
+
+        music.play();
+        musicButton.innerHTML = "🎵";
+        playing = true;
+
     }
-  });
-}
 
-// ===========================
-// INTRO TYPEWRITER
-// ===========================
+};
 
-const introScreen = document.getElementById("introScreen");
-const introText = document.getElementById("introText");
-
-const message =
-  "A little surprise for the most beautiful girl in my life... ❤️";
-
-let charIndex = 0;
-
-function typeWriter() {
-  if (!introText) return;
-
-  if (charIndex < message.length) {
-    introText.textContent += message.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeWriter, 60);
-  }
-}
-
-typeWriter();
-
-setTimeout(() => {
-  if (introScreen) {
-    introScreen.classList.add("hide");
-  }
-
-  if (music) {
-    music.play().catch(() => {});
-  }
-}, 5500);
-
-// ===========================
-// START JOURNEY BUTTON
-// ===========================
+// =============================
+// START BUTTON
+// =============================
 
 const startBtn = document.getElementById("startJourney");
 
-if (startBtn) {
-  startBtn.addEventListener("click", () => {
-    const chapter1 = document.getElementById("chapter1");
+if(startBtn){
 
-    if (chapter1) {
-      chapter1.scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  });
-}
+startBtn.onclick = ()=>{
 
-// ===========================
-// SONG CHANGE ON SCROLL
-// ===========================
+document.getElementById("chapter1").scrollIntoView({
 
-const sectionIds = [
-  "cover",
-  "chapter1",
-  "chapter2",
-  "chapter3",
-  "chapter4",
-  "chapter5",
-  "chapter6",
-  "final"
-];
+behavior:"smooth"
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
-      const index = sectionIds.indexOf(entry.target.id);
-
-      if (index !== -1 && index !== currentSong) {
-        currentSong = index;
-
-        if (music) {
-          music.src = songs[index];
-          music.play().catch(() => {});
-        }
-      }
-    });
-  },
-  {
-    threshold: 0.55
-  }
-);
-
-sectionIds.forEach((id) => {
-  const section = document.getElementById(id);
-
-  if (section) {
-    observer.observe(section);
-  }
 });
 
-// ===========================
-// ENVELOPE
-// ===========================
-
-const envelope = document.getElementById("envelope");
-const openLetter = document.getElementById("openLetter");
-
-if (openLetter && envelope) {
-  openLetter.addEventListener("click", () => {
-    envelope.classList.toggle("open");
-
-    if (envelope.classList.contains("open")) {
-      openLetter.textContent = "❤️ I Love You Forever ❤️";
-    } else {
-      openLetter.textContent = "💌 Open My Letter";
-    }
-  });
 }
+
+}
+
+// =============================
+// HEARTS
+// =============================
+
+const hearts=document.getElementById("hearts");
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.innerHTML="❤";
+
+heart.style.position="absolute";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.top="100vh";
+
+heart.style.fontSize=(16+Math.random()*20)+"px";
+
+heart.style.color="#ff5c9d";
+
+heart.style.opacity=Math.random();
+
+heart.style.animation=`floatHeart ${6+Math.random()*5}s linear forwards`;
+
+hearts.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},11000);
+
+}
+
+setInterval(createHeart,350);
+
+// =============================
+// PETALS
+// =============================
+
+const petals=document.getElementById("petals");
+
+function createPetal(){
+
+const flower=document.createElement("div");
+
+flower.innerHTML="🌸";
+
+flower.style.position="absolute";
+
+flower.style.left=Math.random()*100+"vw";
+
+flower.style.top="-50px";
+
+flower.style.fontSize=(18+Math.random()*18)+"px";
+
+flower.style.animation=`fall ${7+Math.random()*6}s linear forwards`;
+
+petals.appendChild(flower);
+
+setTimeout(()=>{
+
+flower.remove();
+
+},13000);
+
+}
+
+setInterval(createPetal,450);
+
+// =============================
+// SPARKLES
+// =============================
+
+const sparkles=document.getElementById("sparkles");
+
+function sparkle(){
+
+const star=document.createElement("div");
+
+star.innerHTML="✨";
+
+star.style.position="absolute";
+
+star.style.left=Math.random()*100+"vw";
+
+star.style.top=Math.random()*100+"vh";
+
+star.style.fontSize=(10+Math.random()*10)+"px";
+
+star.style.opacity=Math.random();
+
+sparkles.appendChild(star);
+
+setTimeout(()=>{
+
+star.remove();
+
+},2500);
+
+}
+
+setInterval(sparkle,250);
